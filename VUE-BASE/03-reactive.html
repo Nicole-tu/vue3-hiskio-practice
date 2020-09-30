@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>reactive</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{message.Text}}</h1>
+    <ul>
+      <li v-for="item of list">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // reactive只能接陣列或物件型別的值
+    const { reactive } = Vue;
+    const App = {
+      setup() {
+        const message = reactive({ Text: "Hello Vue!" });
+        const list = reactive(['apple', 'banana', 'grape']);
+        return {
+          message,
+          list
+        };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
+</html>

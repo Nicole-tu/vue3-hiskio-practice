@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>let 與 const</title>
+</head>
+
+<body>
+  <a id="link"></a>
+  <script>
+    const dom = document.getElementById('link');
+    if (true) {
+      var a = 1;
+      let b = 2;// 以大括號界定可使用範圍
+      const c = 3;// 不能被修改的變數（常數）
+
+      // js裡物件和陣列可以被改變值 但不能改變型別（但let都可以）
+      const d = { name: 'Test' };
+      d['age'] = 12;
+
+      const e = [];
+      e.push('name');
+    }
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+    console.log(e);
+  </script>
+</body>
+
+</html>

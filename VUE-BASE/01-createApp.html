@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>createApp & setup</title>
+</head>
+
+<body>
+  <div id="app">
+    {{message}}
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 用最外層的div包所有HTML
+    const App = {
+      setup() { // vue的操作（資料,methods）
+        return {
+          message: '123' // 這樣的寫法會無法跟蹤資料（也就是無法綁定）
+        }; // 要回到HTML上
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
+</html>

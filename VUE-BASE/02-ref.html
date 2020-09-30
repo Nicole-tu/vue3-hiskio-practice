@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ref</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+    <h2>{{message2}}</h2>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 變數都會存在Vue裡面
+    // ref 可接受任何型別的東西
+    const { ref } = Vue;
+    const App = {
+      setup() {
+        const message = ref("Hello Vue!");
+        const message2 = ref("Morning Vue!");
+        return {
+          message,
+          message2
+        };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
+</html>

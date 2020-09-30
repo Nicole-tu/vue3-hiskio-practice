@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>箭頭函式運算式（arrow function expression）</title>
+</head>
+
+<body>
+  <a id="aLink1" href="javascript:;">Click1</a>
+  <a id="aLink2" href="javascript:;">Click2</a>
+  <script>
+    document.getElementById("aLink1").addEventListener("click", function () {
+      console.log(this); // DOM 元素本身
+    });
+    document.getElementById("aLink2").addEventListener("click", () => {
+      console.log(this); // window整個不會指到本身DOM元素（箭頭函式裡面沒有this）
+    });
+    document.getElementById("aLink2").addEventListener("click", (e) => {
+      console.log(e.target); // 這樣才會抓到DOM元素本身
+    });
+  </script>
+</body>
+
+</html>

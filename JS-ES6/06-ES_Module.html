@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ES Module</title>
+</head>
+
+<body>
+  <script type="module">
+    // type=module 告知瀏覽器使用ES6 module不支援IE
+    // 拆分不同的function 或變數,比較好維護
+    import Add, { Name, Age, Remove } from "./js/Tools.js";
+    console.log(Add(4, 2));
+    console.log(Name);
+    console.log(Age);
+    console.log(Remove(5, 2));
+  </script>
+</body>
+
+</html>
