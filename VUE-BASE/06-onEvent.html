@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>v-on:Event</title>
-  </head>
-  <body>
-    <div id="app">
-      <h1></h1>
-      <button>Add</button>
-      <button>Remove</button>
-    </div>
-    <script src="./js/vue.js"></script>
-    <script>
-      const App = {
-        setup() {
-          return {};
-        },
-      };
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v-on:Event</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{num}}</h1>
+    <h2>{{numData.idx}}</h2>
+    <button v-on:click="addFn">Add</button>
+    <button @click="removeFn">Remove</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const { ref, reactive } = Vue;
+    const App = {
+      setup() {
+        // ref被const定義不能直接修改值，要用.value取得值
+        const num = ref(0);
+
+        const numData = reactive({ idx: 0 });
+
+        const addFn = () => {
+          num.value++;
+          numData.idx++;
+        }
+
+        const removeFn = () => {
+          num.value--;
+        }
+
+        return { num, addFn, numData, removeFn };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>

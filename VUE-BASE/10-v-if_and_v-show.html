@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>v-if and v-show</title>
-  </head>
-  <body>
-    <div id="app">
-      <h1 id="vue-if">{{Text}}</h1>
-      <h1 id="vue-show">{{Text}}</h1>
-      <button @click="handDomShow">Hand Dom Show</button>
-    </div>
-    <script src="./js/vue.js"></script>
-    <script>
-      const { ref } = Vue;
-      const App = {
-        setup() {
-          const isShow = ref(false);
-          const Text = ref("Hello Vue!");
 
-          const handDomShow = () => {
-            isShow.value = !isShow.value;
-          };
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v-if and v-show</title>
+</head>
 
-          return {
-            Text,
-            isShow,
-            handDomShow,
-          };
-        },
-      };
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+<body>
+  <div id="app">
+    <h1 id="vue-if" v-if="isShow">{{Text}}</h1>
+    <h1 id="vue-show" v-show="isShow">{{Text}}</h1>
+    <button @click="handDomShow">Hand Dom Show</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const { ref } = Vue;
+    const App = {
+      setup() {
+        // v-if 消耗的資源很高 如果很常切換DOM元素的話不要用 因為v-if是刪除再增加 => 適用權限的部分 （減少渲染效能）
+        // 渲染的過程 v-show 是渲染完之後再加上display:none (增加切換的速度)
+        const isShow = ref(false);
+        const Text = ref("Hello Vue!");
+
+        const handDomShow = () => {
+          isShow.value = !isShow.value;
+        };
+
+        return {
+          Text,
+          isShow,
+          handDomShow,
+        };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>

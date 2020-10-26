@@ -15,12 +15,19 @@
   <script src="./js/vue.js"></script>
   <script>
     // 變數都會存在Vue裡面
-    // ref 可接受任何型別的東西
+    // ref (包裝資料並綁定到Vue)可接受任何型別的東西
+    // Vue.ref 會回傳一個value物件
+    // 沒有綁定就無法修改
     const { ref } = Vue;
     const App = {
       setup() {
         const message = ref("Hello Vue!");
         const message2 = ref("Morning Vue!");
+
+        setTimeout(() => {
+          message.value = "Hello Vue! 3";
+        }, 3000);
+
         return {
           message,
           message2

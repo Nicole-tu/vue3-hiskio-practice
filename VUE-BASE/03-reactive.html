@@ -9,7 +9,7 @@
 
 <body>
   <div id="app">
-    <h1>{{message.Text}}</h1>
+    <h1>{{message.text}}</h1>
     <ul>
       <li v-for="item of list">
         {{item}}
@@ -18,11 +18,12 @@
   </div>
   <script src="./js/vue.js"></script>
   <script>
-    // reactive只能接陣列或物件型別的值
+    // reactive只能接受陣列或物件型別的值
+    // 
     const { reactive } = Vue;
     const App = {
       setup() {
-        const message = reactive({ Text: "Hello Vue!" });
+        const message = reactive({ text: 'Hello Vue!' });
         const list = reactive(['apple', 'banana', 'grape']);
         return {
           message,

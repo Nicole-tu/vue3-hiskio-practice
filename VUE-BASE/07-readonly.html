@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>readonly</title>
-    <style>
-      button {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <h1>{{Num.idx}}</h1>
-      <button @click="AddFn">Add</button>
-      <button @click="Test">Add copy</button>
-    </div>
-    <script src="./js/vue.js"></script>
-    <script>
-      const { reactive } = Vue;
-      const App = {
-        setup() {
-          const Num = reactive({ idx: 0 });
-          const AddFn = () => {
-            Num.idx++;
-          };
 
-          const Test = () => {};
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>readonly</title>
+  <style>
+    button {
+      color: red;
+    }
+  </style>
+</head>
 
-          return { Num, AddFn, Test };
-        },
-      };
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+<body>
+  <div id="app">
+    <h1>{{Num.idx}}</h1>
+    <button @click="AddFn">Add</button>
+    <button @click="Test">Add copy</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const { ref, reactive, readonly } = Vue;
+    const App = {
+      setup() {
+        const Num = reactive({ idx: 0 });
+        const copyNum = readonly(Num);
+
+        const refNum = ref(0);
+        const copyRefNum = readonly(refNum);
+        // 直接放reactive物件且會同步更新
+        // readonly的狀況不可以被修改（適用在只要get的物件）
+
+        const AddFn = () => {
+          Num.idx++;
+        };
+
+        const Test = () => {
+          copyNum.idx++;
+          // vue.js:690 Set operation on key "idx" failed: target is readonly.
+        };
+
+        return { Num, AddFn, Test };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>

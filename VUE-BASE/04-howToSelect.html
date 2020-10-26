@@ -10,7 +10,7 @@
 <body>
   <div id="app">
     <h1>{{refMessage}}</h1>
-    <h1>{{message.Text}}</h1>
+    <h1>{{reactiveMessage.text}}</h1>
   </div>
   <script src="./js/vue.js"></script>
   <script>
@@ -21,9 +21,9 @@
         const refMessage = ref("ref -> Hello Vue!");
 
         // reactive只能接受陣列或是物件，可以做深度的監聽，訪問資料的時候不需要 .value
-        const reactiveMessage = reactive({ Text: "reactive -> Hello Vue!" });
+        const reactiveMessage = reactive({ text: "reactive -> Hello Vue!" });
 
-        // ref 無法偵測到陣列或物件的變動，但reactive可以做深層的偵測
+        // ref 無法偵測到陣列或物件的變動，但reactive可以做深層的偵測(物件包物件)
         // 大部分情況下都用ref，如果是陣列或物件就用reactive
 
         return {

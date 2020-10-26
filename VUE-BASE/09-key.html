@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>key</title>
-  </head>
-  <body>
-    <div id="app">
-      <ul>
-        <li v-for="(list, idx) in listArr" v-show="list.show">
-          {{idx + 1}}. {{list.name}}
-        </li>
-      </ul>
-    </div>
-    <script src="./js/vue.js"></script>
-    <script>
-      const { reactive } = Vue;
-      const App = {
-        setup() {
-          const listArr = reactive([
-            { name: "2020 Vue3 專業職人 | 入門篇", show: true },
-            { name: "2020 Vue3 專業職人 | 加值篇", show: false },
-            { name: "2020 Vue3 專業職人 | 進階篇", show: true },
-            { name: "現代 JavaScript 職人之路｜入門篇", show: true },
-            { name: "現代 JavaScript 職人之路｜中階實戰篇", show: false },
-          ]);
-          return {
-            listArr,
-          };
-        },
-      };
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>key</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(list, idx) in listArr" v-bind:key="list.name" v-show="list.show">
+        {{idx + 1}}. {{list.name}}
+      </li>
+    </ul>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // v-for 透過 key 綁定就不會在資料有被異動時重新渲染全部的 DOM 只會變動有被修改的值
+    // 一定要搭配key （所有資料唯一的索引）
+    // index是用位置去指 所以如果有異動的話索引也會變位置 會導致資料渲染錯誤
+    const { reactive } = Vue;
+    const App = {
+      setup() {
+        const listArr = reactive([
+          { name: "2020 Vue3 專業職人 | 入門篇", show: true },
+          { name: "2020 Vue3 專業職人 | 加值篇", show: false },
+          { name: "2020 Vue3 專業職人 | 進階篇", show: true },
+          { name: "現代 JavaScript 職人之路｜入門篇", show: true },
+          { name: "現代 JavaScript 職人之路｜中階實戰篇", show: false },
+        ]);
+        return {
+          listArr,
+        };
+      },
+    };
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>
