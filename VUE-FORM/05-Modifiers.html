@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modifiers 修飾符</title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <style>
-      input {
-        height: 30px;
-        padding-left: 5px;
-      }
-      p {
-        color: #fff;
-      }
-      .input-box {
-        margin-bottom: 30px;
-        padding-left: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <div class="input-box">
-        <input type="text" placeholder="lazy" v-model="lazyVal" />
-        <p>{{lazyVal}}</p>
-      </div>
-      <div class="input-box">
-        <input type="text" placeholder="number" v-model="numberVal" />
-        <p>{{numberVal}}</p>
-      </div>
-      <div class="input-box">
-        <input type="text" placeholder="trim" v-model="trimVal" />
-        <p>{{trimVal}}</p>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modifiers 修飾符</title>
+  <link rel="stylesheet" href="./css/main.css" />
+  <style>
+    input {
+      height: 30px;
+      padding-left: 5px;
+    }
+
+    p {
+      color: #fff;
+    }
+
+    .input-box {
+      margin-bottom: 30px;
+      padding-left: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-model修飾符 -->
+    <div class="input-box">
+      <!-- lazy value 資料不會同步出現 focus移除之後才會同步資料 可以幫助離開表單時才會同步 -->
+      <input type="text" placeholder="lazy" v-model.lazy="lazyVal" />
+      <p>{{lazyVal}}</p>
     </div>
-    <script src="./js/vue.js"></script>
-    <script>
-      const { ref, watch } = Vue;
-      const App = {
-        setup() {
-          const lazyVal = ref("");
-          const numberVal = ref("");
-          const trimVal = ref("");
+    <div class="input-box">
+      <!-- number value 可以將字串轉型成數字類型 -->
+      <input type="text" placeholder="number" v-model.number="numberVal" />
+      <p>{{numberVal}}</p>
+    </div>
+    <div class="input-box">
+      <!-- trim value 自動去除前後空格 -->
+      <input type="text" placeholder="trim" v-model.trim="trimVal" />
+      <p>{{trimVal}}</p>
+    </div>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const { ref, watch } = Vue;
+    const App = {
+      setup() {
+        const lazyVal = ref("");
+        const numberVal = ref("");
+        const trimVal = ref("");
 
-          watch(lazyVal, (newVal) => {
-            console.log(`lazy=>${newVal}`);
-          });
-          watch(numberVal, (newVal) => {
-            console.log(`number=>${newVal}`);
-          });
-          watch(trimVal, (newVal) => {
-            console.log(`trim=>${newVal}`);
-          });
+        watch(lazyVal, (newVal) => {
+          console.log(`lazy=>${newVal}`);
+        });
+        watch(numberVal, (newVal) => {
+          console.log(`number=>${newVal}`);
+        });
+        watch(trimVal, (newVal) => {
+          console.log(`trim=>${newVal}`);
+        });
 
-          return { lazyVal, numberVal, trimVal };
-        },
-      };
+        return { lazyVal, numberVal, trimVal };
+      },
+    };
 
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>

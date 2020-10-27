@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Select</title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/03-Select.css" />
-  </head>
-  <body>
-    <div id="app">
-      <div class="select-box">
-        <select>
-          <option disabled value="">請選擇縣市</option>
-        </select>
-        <select>
-          <option disabled value="">請選擇區域</option>
-        </select>
-      </div>
-      <a class="btn">送出</a>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
-    <script src="./js/vue.js"></script>
-    <script>
-      const App = {
-        setup() {
-          return {};
-        },
-      };
 
-      Vue.createApp(App).mount("#app");
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select</title>
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/03-Select.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="select-box">
+      <select v-model="citySelected">
+        <option disabled value="">請選擇縣市</option>
+        <option v-for="city in twZip.city" :key="city.name" :value="city.name">{{city.name}}</option>
+      </select>
+      <select v-model="areaSelected">
+        <option disabled value="">請選擇區域</option>
+        <option v-for="area in twZip.area" :key="area.zip" :value="area.zip">{{area.name}}</option>
+      </select>
+    </div>
+    <a class="btn" @click="handleSubmit">送出</a>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <script src="./js/vue.js"></script>
+  <script>
+    const { onMounted, reactive, ref, watch } = Vue;
+    const App = {
+      setup() {
+        const twZip = reactive({ city: [], area: [] });
+        const citySelected = ref('');
+        const areaSelected = ref('');
+
+        watch(citySelected, (newCity) => {
+          const filteredCity = twZip.city.filter(city => city.name === newCity);
+          areaSelected.value = '';//清空
+          twZip.area = filteredCity[0].area;
+        });
+
+        const handleSubmit = () => {
+          console.log({ city: citySelected.value, area: areaSelected.value });
+        }
+
+        onMounted(() => {
+          axios.get('https://vue-lessons-api.herokuapp.com/city/list').then(res => {
+            twZip.city = res.data.twzip.city;
+          });
+        });
+        return { twZip, citySelected, areaSelected, handleSubmit };
+      },
+    };
+
+    Vue.createApp(App).mount("#app");
+  </script>
+</body>
+
 </html>
