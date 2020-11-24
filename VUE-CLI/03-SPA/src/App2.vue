@@ -12,6 +12,7 @@ export default {
 
 <template>
   <Header />
+  <router-view />
   <Footer />
 </template>
 
