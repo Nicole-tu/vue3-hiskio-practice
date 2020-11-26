@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-// import Rwd from "../views/Rwd.vue";
+import NotFoundComponent from "../views/NotFoundComponent.vue";
+
 
 const routes = [
   {
@@ -38,7 +39,12 @@ const routes = [
     path: "/nodejs",
     name: "nodejs",
     component: () => import("../views/Nodejs.vue"),
-  }
+  },
+  // 例外處理(不符合上面網址)一定要貼在最下面
+  {
+    path: "/:pathMatch(.*)",
+    component: NotFoundComponent
+  },
 ];
 
 const router = createRouter({
