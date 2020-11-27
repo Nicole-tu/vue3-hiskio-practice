@@ -22,7 +22,6 @@ export default {
         .get(`https://vue-lessons-api.herokuapp.com/courses/${route.params.id}`)
         .then((res) => {
           course.data = res.data.data[0];
-          console.log(course.data);
         })
         .catch(err => {
           isError.value = true;

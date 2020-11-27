@@ -24,7 +24,6 @@ export default {
         .get('https://vue-lessons-api.herokuapp.com/courses/list')
         .then((res) => {
           coursesList.data = res.data;
-          console.log(coursesList.data)
         })
     })
 
@@ -56,11 +55,11 @@ export default {
     <!-- 如果有超過一個 @click 的事件都要加上修飾符 -->
     <!-- @click.middle 滑鼠中間被點擊的事件 -->
     <a
-      class="card"
-      v-for="course in coursesList.data"
       :key="course.id"
       @click.left="gotoNewRouter(course.id)"
       @click.middle="openNewTab(course.id)"
+      class="card"
+      v-for="course in coursesList.data"
     >
       <img :src="course.photo" alt />
       <div class="content">

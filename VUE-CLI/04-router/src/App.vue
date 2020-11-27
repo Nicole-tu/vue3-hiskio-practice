@@ -11,9 +11,9 @@ export default {
     watch(
       () => route.path,
       () => {
-        routerArr.forEach((path, idx) => {
-          const routerPath = route.path.substr(1).split('/');
-          if (routerPath === path) {
+        routerArr.forEach((router, idx) => {
+          const routerPath = route.path.substr(1).split('/')[0];
+          if (routerPath === router) {
             index.value = idx;
           }
         })
