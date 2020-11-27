@@ -1,9 +1,16 @@
 <script>
 import axios from 'axios';
 import { reactive, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 export default {
   setup() {
-    const coursesList = reactive({ data: {} })
+    const coursesList = reactive({ data: {} });
+
+    const router = useRouter();
+
+    const gotoNewRouter = (id) => {
+      router.push({ path: `/courses/${id}` })
+    }
 
     onMounted(() => {
       axios
@@ -14,30 +21,49 @@ export default {
         })
     })
 
-    return { coursesList };
+    return { coursesList, gotoNewRouter };
   },
 };
 </script>
 <template>
   <div id="courses">
     <router-link
+      :key="course.id"
       :to="`/courses/${course.id}`"
       class="card"
       v-for="course in coursesList.data"
-      :key="course.id"
     >
       <img :src="course.photo" alt />
       <div class="content">
         <h1>{{course.name}}</h1>
         <div class="teacher-box">
           <div class="teach-img">
-            <img class="teacher" :src="course.teacher.img" alt />
+            <img :src="course.teacher.img" alt class="teacher" />
             <p>{{course.teacher.name}}</p>
           </div>
           <h2>NTD:{{course.money}}</h2>
         </div>
       </div>
     </router-link>
+    <!-- 改用router push -->
+    <!-- <a
+      :key="course.id"
+      @click="gotoNewRouter(course.id)"
+      class="card"
+      v-for="course in coursesList.data"
+    >
+      <img :src="course.photo" alt />
+      <div class="content">
+        <h1>{{course.name}}</h1>
+        <div class="teacher-box">
+          <div class="teach-img">
+            <img :src="course.teacher.img" alt class="teacher" />
+            <p>{{course.teacher.name}}</p>
+          </div>
+          <h2>NTD:{{course.money}}</h2>
+        </div>
+      </div>
+    </a>-->
   </div>
 </template>
 

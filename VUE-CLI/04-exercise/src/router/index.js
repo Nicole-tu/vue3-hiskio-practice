@@ -13,13 +13,13 @@ const routes = [
     component: () => import("../views/About.vue"),
   },
   {
-    path: "/course",
-    name: "Course",
+    path: "/courses",
+    name: "Courses",
     component: () => import("../views/Courses/index.vue"),
   },
   {
-    path: "/course/:id",
-    name: "Course_id",
+    path: "/courses/:id",
+    name: "Courses_id",
     component: () => import("../views/Courses/_id.vue"),
   },
 ];
