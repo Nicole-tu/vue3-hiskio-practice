@@ -9,8 +9,15 @@ export default {
     const router = useRouter();
 
     const gotoNewRouter = (id) => {
-      router.push({ path: `/courses/${id}` })
+      router.push({ path: `/courses/${id}` });
     }
+
+    // 透過 a link 開啟新分頁
+    const openNewTab = (id) => {
+      // resolve 儲存現在網址狀態
+      const saveURL = router.resolve({ path: `/courses/${id}` });
+      window.open(saveURL.href);
+    };
 
     onMounted(() => {
       axios
@@ -21,13 +28,13 @@ export default {
         })
     })
 
-    return { coursesList, gotoNewRouter };
+    return { coursesList, gotoNewRouter, openNewTab };
   },
 };
 </script>
 <template>
   <div id="courses">
-    <router-link
+    <!-- <router-link
       :key="course.id"
       :to="`/courses/${course.id}`"
       class="card"
@@ -44,13 +51,16 @@ export default {
           <h2>NTD:{{course.money}}</h2>
         </div>
       </div>
-    </router-link>
+    </router-link>-->
     <!-- 改用router push -->
-    <!-- <a
-      :key="course.id"
-      @click="gotoNewRouter(course.id)"
+    <!-- 如果有超過一個 @click 的事件都要加上修飾符 -->
+    <!-- @click.middle 滑鼠中間被點擊的事件 -->
+    <a
       class="card"
       v-for="course in coursesList.data"
+      :key="course.id"
+      @click.left="gotoNewRouter(course.id)"
+      @click.middle="openNewTab(course.id)"
     >
       <img :src="course.photo" alt />
       <div class="content">
@@ -63,7 +73,7 @@ export default {
           <h2>NTD:{{course.money}}</h2>
         </div>
       </div>
-    </a>-->
+    </a>
   </div>
 </template>
 

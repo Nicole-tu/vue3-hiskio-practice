@@ -14,21 +14,21 @@ export default {
         routerArr.forEach((path, idx) => {
           const routerPath = route.path.substr(1).split('/');
           if (routerPath === path) {
-            index.value = index;
+            index.value = idx;
           }
         })
       });
     return { index };
-  },
+  }
 };
 </script>
 
 <template>
   <div id="nav">
-    <!-- 當網址符合的時候會自動增加一個class:router-link-active -->
-    <router-link :class="{'active',index===0}" to="/">Home</router-link>|
-    <router-link :class="{'active',index===1}" to="/about">About</router-link>|
-    <router-link :class="{'active',index===2}" to="/courses">Course</router-link>
+    <!-- 當網址符合的時候會自動增加一個class router-link-active -->
+    <router-link :class="{'active':index === 0}" to="/">Home</router-link>|
+    <router-link :class="{'active':index === 1 }" to="/about">About</router-link>|
+    <router-link :class="{'active':index === 2}" to="/courses">Course</router-link>
   </div>
   <router-view />
 </template>
