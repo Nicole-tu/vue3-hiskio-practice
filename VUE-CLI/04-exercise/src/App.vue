@@ -1,16 +1,34 @@
 <script>
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 export default {
   setup() {
-    return {};
+    const routerArr = ['', 'about', 'courses'];
+    const route = useRoute();
+    const index = ref(0);
+
+    // 監控網址變化
+    watch(
+      () => route.path,
+      () => {
+        routerArr.forEach((path, idx) => {
+          const routerPath = route.path.substr(1).split('/');
+          if (routerPath === path) {
+            index.value = index;
+          }
+        })
+      });
+    return { index };
   },
 };
 </script>
 
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>|
-    <router-link to="/about">About</router-link>|
-    <router-link to="/courses">Course</router-link>
+    <!-- 當網址符合的時候會自動增加一個class:router-link-active -->
+    <router-link :class="{'active',index===0}" to="/">Home</router-link>|
+    <router-link :class="{'active',index===1}" to="/about">About</router-link>|
+    <router-link :class="{'active',index===2}" to="/courses">Course</router-link>
   </div>
   <router-view />
 </template>
