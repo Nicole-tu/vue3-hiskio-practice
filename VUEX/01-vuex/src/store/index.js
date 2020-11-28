@@ -1,8 +1,28 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
-  actions: {},
-  mutations: {},
-  modules: {},
+  state: {
+    isOpen: false
+  },
+  actions: {
+    // 透過 actions 觸發 mutations 事件
+    handleMenuOpen(context) {
+      const bool = !context.state.isOpen;
+      // commit(mutations名稱,參數)
+      context.commit('handleMenuOpen', bool)
+    }
+  },
+  mutations: {
+    // 用 mutations 修改 state 的值
+    handleMenuOpen(state, bool) {
+      state.isOpen = bool;
+    }
+  },
+  getters: {
+    // 資料流統一由 getters 丟出去
+    isOpen(state) {
+      return state.isOpen;
+    }
+  },
+  // modules: {},
 });
