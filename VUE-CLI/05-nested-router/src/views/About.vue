@@ -1,7 +1,15 @@
 <template>
   <div class="about">
-    <nav></nav>
-    <main></main>
+    <nav>
+      <!-- 網址符合就會加上 router-link-exact-active -->
+      <router-link to="/about/guide">Guide</router-link>
+      <router-link to="/about/reference">Reference</router-link>
+      <router-link to="/about/changelog">Changelog</router-link>
+      <router-link to="/about/github">Github</router-link>
+    </nav>
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 <style lang="scss" scoped>
