@@ -1,4 +1,6 @@
 <script>
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
 import MenuBtn from "../src/components/MenuBtn.vue";
 import MenuSlid from "../src/components/MenuSlid.vue";
 export default {
@@ -7,6 +9,15 @@ export default {
     MenuSlid,
   },
   setup() {
+
+    const store = useStore();
+
+    onMounted(() => {
+      // 前面要加 namespace 的名稱
+      store.getters['Auth/getToken'];
+      store.dispatch('Auth/setToken', 'aaa');
+    });
+
     return {};
   },
 };
@@ -15,7 +26,7 @@ export default {
   <div id="app">
     <MenuBtn />
     <div class="content">
-      <img id="img" alt="Vue logo" src="./assets/logo.png" />
+      <img alt="Vue logo" id="img" src="./assets/logo.png" />
     </div>
     <MenuSlid />
   </div>
@@ -31,7 +42,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: "Microsoft JhengHei", "Heiti TC", "sans-serif";
+  font-family: 'Microsoft JhengHei', 'Heiti TC', 'sans-serif';
 }
 #img {
   display: block;
@@ -43,7 +54,7 @@ body {
   > .content {
     width: 100%;
     height: 100%;
-    background-image: url("https://source.unsplash.com/WLUHO9A_xik/1600x900");
+    background-image: url('https://source.unsplash.com/WLUHO9A_xik/1600x900');
     background-size: cover;
     background-position: center;
     display: flex;
