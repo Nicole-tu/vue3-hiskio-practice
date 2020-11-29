@@ -11,9 +11,24 @@ export default {
   setup() {
     const store = useStore();
 
-    const handImgLoad = (imgArr) => {};
+    // loading 不屬於資料流就可以放在畫面中不用在 vuex 處理 
+    const handleImgLoad = (images) => {
+      let i = 0;
+      images.forEach(image => {
+        const newImage = new Image();
+        newImage.src = image.url
+        newImage.onload = () => {
+          i++;
+          store.dispatch('handleLoadingStatus', images.length === i);
+        }
+      });
+    }
 
-    const init = () => {};
+    const init = () => {
+      store.dispatch('handleInit').then((res) => {
+        handleImgLoad(res);
+      });
+    };
 
     onMounted(() => {
       init();

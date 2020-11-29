@@ -5,9 +5,12 @@ export default {
   setup() {
     const store = useStore();
 
-    const addImg = () => {};
+    const addImg = () => {
+      store.dispatch('handleAddImg')
+    };
 
-    const removeImg = () => {};
+    const removeImg = () => {
+      store.dispatch('handleRemoveImg')    };
 
     return { addImg, removeImg };
   },
