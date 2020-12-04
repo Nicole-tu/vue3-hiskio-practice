@@ -1,14 +1,18 @@
 <script>
+import { useState } from '../composition-api';
 export default {
   setup() {
-    return {};
+
+    const { index, addState } = useState();
+
+    return { index, addState };
   },
 };
 </script>
 <template>
   <div class="block">
-    <h1>number:</h1>
-    <button>add</button>
+    <h1>number:{{index}}</h1>
+    <button @click="addState">add</button>
   </div>
 </template>
 

@@ -13,9 +13,10 @@ export default {
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <MousePosition />
-  <!-- <StateTodo /> -->
-  <!-- <StateTodo /> -->
-  <!-- <FetchData /> -->
+  <StateTodo />
+  <!-- 雖然有兩個一樣的component，但是裡面封裝的方法是private不會重複 -->
+  <StateTodo />
+  <FetchData />
 </template>
 
 <style lang="scss">

@@ -1,3 +1,7 @@
-import { MousePosition } from './useMousePosition.js';
+import { MousePosition } from './useMousePosition';
+import { StateAdd } from './useState';
+import { Fetches } from './useFetch';
 
 export const useMousePosition = MousePosition;
+export const useState = StateAdd;
+export const useFetch = Fetches;
