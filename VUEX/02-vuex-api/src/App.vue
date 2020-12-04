@@ -26,6 +26,7 @@ export default {
 
     const init = () => {
       store.dispatch('handleInit').then((res) => {
+        console.log(res)
         handleImgLoad(res);
       });
     };
