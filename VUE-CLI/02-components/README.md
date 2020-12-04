@@ -1,4 +1,4 @@
-# vue-cli-props
+# 組件
 
 1. 組建傳遞props
 2. 實作 props

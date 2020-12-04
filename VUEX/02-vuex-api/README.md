@@ -1,4 +1,4 @@
-# vuex-api-example
+# VUEX 串接 API
 
 ## Project setup
 ```

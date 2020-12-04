@@ -1,4 +1,4 @@
-# vue-cli-project
+# SPA
 
 ## Project setup
 ```
