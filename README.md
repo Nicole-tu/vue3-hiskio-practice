@@ -13,3 +13,16 @@
 - 學會一些業界實戰開發上面的經驗
 - 學會如何規劃使用 API 的資料流
 - 學習老師開發上面的思考邏輯以及實務經驗還有文件上面沒有寫的內容
+
+
+### vscode 推薦套件
+1. vscode-icons
+2. Vetur
+3. Prettier - Code formatter
+4. Live Server
+5. gitignore
+6. Babel JavaScript
+7. Color Highlight
+8. Bracket Pair Colorizer
+9. Copy filename
+10. AutoFileName
